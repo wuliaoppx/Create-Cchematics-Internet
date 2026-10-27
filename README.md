@@ -4,6 +4,10 @@
 
 在 Create 图纸桌里直连蓝图站。
 
+**中文** ｜ [English](#english)
+
+> 其他平台版本：[`README-CurseForge.md`](README-CurseForge.md)（模组平台，英文优先）·[`README-mcmod.txt`](README-mcmod.txt)（MC百科，纯中文纯文本）
+
 给 Minecraft **1.21.1 + NeoForge 21.1.265 + Create 6.0.10** 用的小模组：在机械动力的**图纸桌（Schematic Table）**面板上方加三个按钮，
 点开就能浏览蓝图站、翻页、搜关键词、看详情，把蓝图**下载到 `schematics/`**；非 Create 格式的会自动转成结构 `.nbt`，
 大蓝图还能按尺寸**切块**。
@@ -62,7 +66,7 @@ cd path\to\cms-blueprints
 
 | 文件 | 用于 |
 |---|---|
-| `dist\blueprintnet-0.1.0.jar` | 1.21.1 + NeoForge 21.1.265 + Create 6.0.10 |
+| `dist\blueprintnet-1.21.1-0.1.0.jar` | 1.21.1 + NeoForge 21.1.265 + Create 6.0.10 |
 | `dist\blueprintnet-1.20.1-0.1.0.jar` | 1.20.1 + Forge 47.4.28 + Create 6.0.8 |
 
 最近一次 `-McsTest` 结果：
@@ -156,7 +160,7 @@ cd path\to\cms-blueprints
 
 ## 4. 配置
 
-首次启动会生成 `config/cms-blueprints.properties`：
+首次启动会生成 `config/blueprintnet.properties`（旧名 `cms-blueprints.properties` 存在时会自动迁移）：
 
 ```properties
 site=https://www.creativemechanicserver.com
@@ -370,3 +374,158 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build1201.ps1 -CompileOnly
 | TwelveMonkeys ImageIO | BSD-3-Clause | WebP 解码器，以二进制形式打包进 jar |
 
 模组图标为自制。
+
+---
+---
+
+# English
+
+**Create: Blueprint Network** — browse community blueprint sites from inside Create's Schematic Table.
+
+[中文说明见上](#机械动力蓝图互联网blueprintnet)
+
+Three buttons appear one row above the Schematic Table panel. Click one, browse, pick a blueprint,
+and it lands in `schematics/` ready for the table. Non-Create formats are converted on download,
+and oversized builds can be sliced into pieces.
+
+```
+┌──────────────[CMS][M][处]┐   ← one row above the panel's top-right corner
+│  CMS  ── creativemechanicserver.com  (HTML site, needs CSRF token)
+│  M    ── mcschematic.top             (public JSON API, anonymous)
+│  处    ── blueprint tools: convert / split files in schematics/
+```
+
+> Scope: the user clicks, one file gets saved. No crawling, no background polling.
+
+## Requirements
+
+| | 1.21.1 build | 1.20.1 build |
+|---|---|---|
+| Minecraft | 1.21.1 | 1.20.1 |
+| Loader | NeoForge 21.1.265 | Forge 47.4.28 |
+| Create | 6.0.10 | 6.0.8 |
+| Java | 21 | 17 |
+| Jar | `dist/blueprintnet-1.21.1-0.1.0.jar` | `dist/blueprintnet-1.20.1-0.1.0.jar` |
+
+**Create is mandatory. Blueprint Network itself is client-side** — the server does not need it.
+The 1.20.1 build sets `displayTest="IGNORE_ALL_VERSION"`, so having it installed won't stop you
+from joining servers that don't.
+
+## Install
+
+1. Install Create and its dependencies.
+2. Drop the matching jar into `mods/`.
+3. Start the game. No new items or blocks — everything lives inside the Schematic Table screen.
+
+## Usage
+
+**Entry 1 (normal):** place a Schematic Table and open it — three extra buttons sit one row above
+the panel's top-right corner: `CMS`, `M`, `处`.
+
+**Entry 2 (shortcut):** `/cms`, `/mcs`, `/bptool` open the same screens from chat.
+
+### Browser
+
+| Action | Effect |
+|---|---|
+| Click a row | select it; click again to open |
+| `↑` `↓` | move selection |
+| `Enter` | open the selected entry |
+| Scroll wheel | previous / next page (real requests — both sites are paginated) |
+| Search box + button | keyword search; `Enter` works too (empty = popular on MCS) |
+| Sort button | CMS: downloads / newest · MCS: hot / newest |
+| `ESC` | close |
+
+### Detail
+
+Top-left is the preview, top-right the metadata (title, author, downloads, size, stress, game
+version, notes), and below them a full-width **Files / Materials** tab pair.
+
+The preview cycles through three sources via the small badge in its corner:
+
+| Badge | Source |
+|---|---|
+| `图` | the site's cover image (CMS serves WebP, MCS serves PNG), decoded by a bundled decoder. **Click to open full-screen, scroll to zoom** |
+| `3D` | Create Cyber Goggles, if installed (1.21.1 build only) |
+| `俯` | built-in top-down projection, no extra mods |
+
+Buttons:
+
+- **Download** — saves into `schematics/`. `.litematic` / `.schem` files are converted to structure
+  `.nbt` right after downloading; the original file is kept.
+- **To NBT** — convert the currently selected local file.
+- **Split** — open the split page (below).
+- **Back / Close**.
+
+### Split
+
+| Mode | Meaning | Count |
+|---|---|---|
+| Vertical (X) | cut along X into N slabs, each keeps full height and depth | 2–10 presets, or `-` / `+` for any N |
+| Horizontal (Y) | cut along Y into N layers, each keeps full width and depth | same |
+| Grid (XZ) | k×k in the XZ plane, k² pieces total | 2×2 … 5×5 (options that don't fit are disabled) |
+
+Each piece is `length / N` with the remainder going into the **last** one. Output goes to a
+`<name>/` subfolder as `<name>_x1.nbt`, `<name>_y1.nbt`, `<name>_1x1.nbt`; if that folder already
+exists and isn't empty, `<name>-2/` is used instead.
+
+> Conversion is one-way: other formats → Create structure `.nbt`.
+> Exporting a Create blueprint back to Litematica / WorldEdit is not supported.
+
+### Blueprint tools (`处` / `/bptool`)
+
+Lists every `.nbt` / `.litematic` / `.schem` / `.schematic` under `schematics/`, subdirectories
+included (click a directory row to enter, `../` or Backspace to go up). From there: convert,
+split, or refresh the listing.
+
+### 1.20.1 extras
+
+- **Subfolder picker in the Schematic Table.** A toggle button next to the folder button swaps the
+  file dropdown for a directory dropdown listing every `schematics/` subfolder that directly
+  contains blueprints. Uploads are renamed into the root first, because Create's server-side loader
+  refuses names containing `/`.
+- **Real 3D preview** rendered with Create's own `SchematicRenderer` (shading, transparency, block
+  entities), with drag-to-rotate and scroll-to-zoom. Implemented after
+  [Create Cyber Goggles](https://github.com/ForgeStove/CreateCyberGoggles) (MIT).
+
+## Configuration
+
+`config/blueprintnet.properties` is generated on first launch:
+
+```properties
+site=https://www.creativemechanicserver.com
+userAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) ... Chrome/156.0.0.0 Safari/537.36
+proxy=
+timeoutSeconds=30
+requestIntervalMs=300
+```
+
+- `proxy` — `host:port`. Empty means: use `HTTPS_PROXY` / `HTTP_PROXY` from the environment, then
+  the system default.
+- `userAgent` — CMS sits behind Cloudflare. A plain Chrome UA normally passes; if you do get
+  challenged, copy the string from your browser's dev tools.
+- `requestIntervalMs` — minimum delay between two CMS requests.
+
+## Known limitations
+
+- Hooks Create internals (`CreateClient.SCHEMATIC_SENDER`, `CreatePaths.SCHEMATICS_DIR`,
+  `AllGuiTextures`), pinned to the Create version in the requirements table. A major Create update
+  needs a rebuild.
+- The entry buttons only appear on `SchematicTableScreen`.
+- On 1.21.1 the `3D` preview needs Create Cyber Goggles; without it that mode is skipped.
+- Conversion covers `.litematic` and `.schem` (Sponge v1/v2/v3). MCEdit `.schematic` can be listed
+  and split but not converted.
+- **No Mixin.** The buttons are drawn and hit-tested by the mod rather than registered as real
+  widgets, so they are mouse-only (no Tab focus).
+
+## Building from source
+
+This project is built with `javac` + `jar` instead of Gradle (see section 1 above for the reason).
+`build.ps1` / `build1201.ps1` read paths from a local Minecraft instance — edit `$McDir`,
+`$modsDir`, `$verJson` and `$libsRoot` at the top of those scripts first.
+Most people should just use the prebuilt jars in `dist/`.
+
+## License
+
+MIT — see [`LICENSE`](LICENSE). Third-party components (Create, Create Cyber Goggles,
+TwelveMonkeys ImageIO) are documented in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).

@@ -8,6 +8,8 @@ version="0.1.0"
 logoFile="icon.png"
 displayName="机械动力：蓝图互联网"
 authors="wuliao"
+# 纯客户端模组：服务器装不装都不影响连接（否则装了本模组就进不了没装它的服务器）
+displayTest="IGNORE_ALL_VERSION"
 description='''在机械动力的图纸桌里加三个按钮：CMS 蓝图站、MCS 蓝图站、蓝图处理。
 可以直接浏览两个站点的蓝图列表，选中后下载到 schematics 目录，立刻载入图纸桌；
 也能把 Litematica / WorldEdit 的蓝图转成机械动力能读的结构 nbt，并按竖直、水平或网格方式分割。
