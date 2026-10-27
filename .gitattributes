@@ -1,0 +1,11 @@
+# 统一换行：文本用 LF
+* text=auto eol=lf
+
+# PowerShell 脚本必须保留原始字节（UTF-8 with BOM + CRLF 才能被 PowerShell 5.1 正确解析）
+*.ps1 -text
+*.psm1 -text
+
+# 二进制
+*.jar binary
+*.png binary
+*.zip binary

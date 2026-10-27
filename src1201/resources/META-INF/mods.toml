@@ -1,0 +1,37 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="blueprintnet"
+version="0.1.0"
+logoFile="icon.png"
+displayName="机械动力：蓝图互联网"
+authors="wuliao"
+description='''在机械动力的图纸桌里加三个按钮：CMS 蓝图站、MCS 蓝图站、蓝图处理。
+可以直接浏览两个站点的蓝图列表，选中后下载到 schematics 目录，立刻载入图纸桌；
+也能把 Litematica / WorldEdit 的蓝图转成机械动力能读的结构 nbt，并按竖直、水平或网格方式分割。
+
+1.20.1 Forge 版：蓝图桌内置 3D 预览（用 Create 自己的 SchematicRenderer 真 GL 渲染，可拖拽旋转、滚轮缩放），
+并支持在文件选择器里切换 schematics 目录下的子文件夹。'''
+
+[[dependencies.blueprintnet]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.blueprintnet]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.20.2)"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.blueprintnet]]
+    modId="create"
+    mandatory=true
+    versionRange="[0.5.1,)"
+    ordering="AFTER"
+    side="CLIENT"

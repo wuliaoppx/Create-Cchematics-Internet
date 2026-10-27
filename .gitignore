@@ -1,0 +1,30 @@
+# ---- 构建产物（本地生成的中间目录，约 98 MB）----
+build/
+logs/
+out/
+*.jar
+# 但第三方 WebP 解码器需要随仓库分发，否则克隆后无法编译
+!lib/webp/*.jar
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+
+# ---- IDE / 编辑器 ----
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# ---- 系统 ----
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ---- 本地配置 ----
+*.local
+run/
+
+# 预编译产物（随仓库分发，方便直接下载）
+!dist/*.jar
