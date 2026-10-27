@@ -3,9 +3,9 @@ loaderVersion="[47,)"
 license="MIT"
 
 [[mods]]
-modId="blueprintnet"
+modId="schematicsinternet"
 version="0.1.0"
-logoFile="icon.png"
+logoFile="assets/schematicsinternet/icon.png"
 displayName="机械动力：蓝图互联网"
 authors="wuliao"
 # 纯客户端模组：服务器装不装都不影响连接（否则装了本模组就进不了没装它的服务器）
@@ -17,21 +17,21 @@ description='''在机械动力的图纸桌里加三个按钮：CMS 蓝图站、M
 1.20.1 Forge 版：蓝图桌内置 3D 预览（用 Create 自己的 SchematicRenderer 真 GL 渲染，可拖拽旋转、滚轮缩放），
 并支持在文件选择器里切换 schematics 目录下的子文件夹。'''
 
-[[dependencies.blueprintnet]]
+[[dependencies.schematicsinternet]]
     modId="forge"
     mandatory=true
     versionRange="[47,)"
     ordering="NONE"
     side="CLIENT"
 
-[[dependencies.blueprintnet]]
+[[dependencies.schematicsinternet]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.20.1,1.20.2)"
     ordering="NONE"
     side="CLIENT"
 
-[[dependencies.blueprintnet]]
+[[dependencies.schematicsinternet]]
     modId="create"
     mandatory=true
     versionRange="[0.5.1,)"

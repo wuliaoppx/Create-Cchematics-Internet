@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 public final class Net {
 
     private static final ExecutorService EXEC = Executors.newSingleThreadExecutor(r -> {
-        Thread t = new Thread(r, "cms-blueprints-net");
+        Thread t = new Thread(r, "schematicsinternet-net");
         t.setDaemon(true);
         return t;
     });

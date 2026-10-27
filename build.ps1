@@ -20,7 +20,7 @@ $ErrorActionPreference = "Stop"
 $proj = $PSScriptRoot
 $versionDir = Join-Path $McDir "versions\$Instance"
 $versionName = "0.1.0"
-$jarName = "blueprintnet-$versionName.jar"
+$jarName = "schematicsinternet-1.21.1-$versionName.jar"
 
 function Fail($msg) { Write-Host "构建失败：$msg" -ForegroundColor Red; exit 1 }
 
@@ -205,7 +205,7 @@ try {
 if (-not $NoInstall) {
     $modsDir = Join-Path $versionDir "mods"
     if (-not (Test-Path $modsDir)) { New-Item -ItemType Directory -Path $modsDir -Force | Out-Null }
-    Get-ChildItem $modsDir -File | Where-Object { $_.Name -match "^(cmsblueprints|blueprintnet)-.*\.jar$" } | Remove-Item -Force
+    Get-ChildItem $modsDir -File | Where-Object { $_.Name -match "^(cmsblueprints|blueprintnet|schematicsinternet)-.*\.jar$" } | Remove-Item -Force
     Copy-Item (Join-Path $proj "build\$jarName") $modsDir -Force
     Write-Host "已安装到：$modsDir" -ForegroundColor Green
 }

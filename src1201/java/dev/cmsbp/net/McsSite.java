@@ -31,7 +31,7 @@ import java.util.Locale;
 public final class McsSite implements Site {
 
     private static final String BASE = "https://mcschematic.top/api/v1";
-    private static final String UA = "cms-blueprints/0.1 (NeoForge mod; +https://mcschematic.top)";
+    private static final String UA = "schematicsinternet/0.1 (Forge mod; +https://mcschematic.top)";
 
     private static final HttpClient HTTP = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(15))

@@ -1,6 +1,6 @@
-<img src="src/main/resources/assets/blueprintnet/icon.png" width="96" align="right" alt="icon">
+<img src="src/main/resources/assets/schematicsinternet/icon.png" width="96" align="right" alt="icon">
 
-# 机械动力：蓝图互联网（blueprintnet）
+# 机械动力：蓝图互联网（schematicsinternet）
 
 在 Create 图纸桌里直连蓝图站。
 
@@ -59,15 +59,15 @@ cd path\to\cms-blueprints
 .\build.ps1 -Smoke             # 离线冒烟：CMS 的 CSRF→搜索→详情→下载
 ```
 
-产物：`build\blueprintnet-0.1.0.jar`（约 713 KB / 441 class，内含 6 个 twelvemonkeys WebP 解码器 jar 与 256×256 图标），
-安装目标 `$McDir\versions\<实例>\mods\`（安装前先删旧的 `cmsblueprints-*.jar` / `blueprintnet-*.jar`）。
+产物：`build\schematicsinternet-1.21.1-0.1.0.jar`（约 713 KB / 441 class，内含 6 个 twelvemonkeys WebP 解码器 jar 与 256×256 图标），
+安装目标 `$McDir\versions\<实例>\mods\`（安装前脚本会自动删掉旧的 `cmsblueprints-*.jar` / `blueprintnet-*.jar` / `schematicsinternet-*.jar`）。
 
 **只想用、不想编**：`dist/` 里放着预编译好的两个 jar，直接丢进 `mods/` 即可。
 
 | 文件 | 用于 |
 |---|---|
-| `dist\blueprintnet-1.21.1-0.1.0.jar` | 1.21.1 + NeoForge 21.1.265 + Create 6.0.10 |
-| `dist\blueprintnet-1.20.1-0.1.0.jar` | 1.20.1 + Forge 47.4.28 + Create 6.0.8 |
+| `dist\schematicsinternet-1.21.1-0.1.0.jar` | 1.21.1 + NeoForge 21.1.265 + Create 6.0.10 |
+| `dist\schematicsinternet-1.20.1-0.1.0.jar` | 1.20.1 + Forge 47.4.28 + Create 6.0.8 |
 
 最近一次 `-McsTest` 结果：
 
@@ -160,7 +160,7 @@ cd path\to\cms-blueprints
 
 ## 4. 配置
 
-首次启动会生成 `config/blueprintnet.properties`（旧名 `cms-blueprints.properties` 存在时会自动迁移）：
+首次启动会生成 `config/schematicsinternet.properties`（旧的 `blueprintnet.properties` / `cms-blueprints.properties` 存在时会自动迁移）：
 
 ```properties
 site=https://www.creativemechanicserver.com
@@ -218,7 +218,7 @@ cms-blueprints/
    │     └─ TableButtonHook.java    图纸桌三个入口按钮（自绘 + 自命中，不用 Mixin）
    └─ resources/
       ├─ META-INF/neoforge.mods.toml
-      └─ assets/blueprintnet/icon.png   256×256 模组图标
+      └─ assets/schematicsinternet/icon.png   256×256 模组图标
 ```
 
 1.20.1 版是同一套代码的另一份源码树（包名相同，多出蓝图桌扩展）：
@@ -267,7 +267,7 @@ cms-blueprints/
 - `3D` 预览：**1.20.1 版内置**（见第 8 节）；**1.21.1 版需要装 CyberGoggles**，`PreviewBridge` 反射探测，缺它时自动跳过该档。
 - 转换只支持 **`.litematic` / `.schem`（Sponge v1/v2/v3）→ `.nbt`**；`.schematic`（MCEdit 数字 id）会明确报错；分割对四种格式都可用，产物全是 `.nbt`。
 - 游戏内 TLS 走 JDK 自己的 `HttpClient`（不是系统 schannel），curl 的 `CRYPT_E_REVOCATION_OFFLINE` 不会出现；公司网做 TLS 拦截时要在 `config` 里给代理。
-- 日志：`<实例目录>\logs\latest.log`，搜 `blueprintnet`：
+- 日志：`<实例目录>\logs\latest.log`，搜 `schematicsinternet`：
   `cms-blueprints 0.1.0 已加载；配置 <路径>；蓝图目录 ...\schematics`
 - 界面里的错误写在面板底部状态行，网络异常截 90 字显示。
 
@@ -276,8 +276,8 @@ cms-blueprints/
 ## 7. 更新记录
 
 - **0.1.0（本次）**
-  - 模组标识从 `cmsblueprints` 改为 **`blueprintnet`**，显示名「机械动力：蓝图互联网」；配置文件随之改名
-    `config/blueprintnet.properties`（旧的 `cms-blueprints.properties` 首次启动会自动复制迁移）。
+  - 模组标识 `cmsblueprints` → `blueprintnet` → **`schematicsinternet`**（当前），显示名「机械动力：蓝图互联网」；配置文件随之改名
+    `config/schematicsinternet.properties`（旧的 `blueprintnet.properties` / `cms-blueprints.properties` 首次启动会自动复制迁移）。
   - 修 `.litematic` 转换的**坐标映射错误**：原先把区域下标 0 当成 `Position` 那一格，而 Litematica 实际按
     `posMinRel = getMinCorner(Position, Position+Size-1)` 打散（`LitematicaSchematic.placeBlocksToWorld`）。
     当区域的 `Size` 有负数（站点下载的 `.litematic` 很常见，如 `Size(36,-153,-35)`）时，整个蓝图会在
@@ -293,7 +293,7 @@ cms-blueprints/
 ## 8. 1.20.1 Forge 版
 
 同一套源码另有一份 1.20.1 Forge 构建：`src1201/` + `build1201.ps1`，产物
-`build\1201\blueprintnet-1.20.1-0.1.0.jar`，安装到 `$modsDir`（脚本顶部变量）。
+`build\1201\schematicsinternet-1.20.1-0.1.0.jar`，安装到 `$modsDir`（脚本顶部变量）。
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\build1201.ps1            # 编译 + 重映射 + 打包 + 安装
@@ -380,9 +380,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build1201.ps1 -CompileOnly
 
 # English
 
-**Create: Blueprint Network** — browse community blueprint sites from inside Create's Schematic Table.
+**Create: Schematics Internet** — browse community blueprint sites from inside Create's Schematic Table.
 
-[中文说明见上](#机械动力蓝图互联网blueprintnet)
+[中文说明见上](#机械动力蓝图互联网schematicsinternet)
 
 Three buttons appear one row above the Schematic Table panel. Click one, browse, pick a blueprint,
 and it lands in `schematics/` ready for the table. Non-Create formats are converted on download,
@@ -405,9 +405,9 @@ and oversized builds can be sliced into pieces.
 | Loader | NeoForge 21.1.265 | Forge 47.4.28 |
 | Create | 6.0.10 | 6.0.8 |
 | Java | 21 | 17 |
-| Jar | `dist/blueprintnet-1.21.1-0.1.0.jar` | `dist/blueprintnet-1.20.1-0.1.0.jar` |
+| Jar | `dist/schematicsinternet-1.21.1-0.1.0.jar` | `dist/schematicsinternet-1.20.1-0.1.0.jar` |
 
-**Create is mandatory. Blueprint Network itself is client-side** — the server does not need it.
+**Create is mandatory. Schematics Internet itself is client-side** — the server does not need it.
 The 1.20.1 build sets `displayTest="IGNORE_ALL_VERSION"`, so having it installed won't stop you
 from joining servers that don't.
 
@@ -490,7 +490,7 @@ split, or refresh the listing.
 
 ## Configuration
 
-`config/blueprintnet.properties` is generated on first launch:
+`config/schematicsinternet.properties` is generated on first launch:
 
 ```properties
 site=https://www.creativemechanicserver.com

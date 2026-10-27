@@ -1,4 +1,4 @@
-# Create: Blueprint Network
+# Create: Schematics Internet
 
 Browse community blueprint sites straight from Create's **Schematic Table**, download the result
 into `schematics/`, and convert or slice it before you place it.
@@ -6,7 +6,7 @@ into `schematics/`, and convert or slice it before you place it.
 **English** ｜ [中文](#中文说明)
 
 > Two builds are shipped. Pick the one that matches your game version:
-> `blueprintnet-1.21.1-0.1.0.jar` or `blueprintnet-1.20.1-0.1.0.jar`.
+> `schematicsinternet-1.21.1-0.1.0.jar` or `schematicsinternet-1.20.1-0.1.0.jar`.
 
 ---
 
@@ -45,7 +45,7 @@ did not click.
 | Create | 6.0.10 | 6.0.8 |
 | Java | 21 | 17 |
 
-**Create is required.** Blueprint Network is a client-side mod — the server does not need it, and
+**Create is required.** Schematics Internet is a client-side mod — the server does not need it, and
 the 1.20.1 build is marked to ignore version mismatches so it will not block you from joining
 servers that don't have it.
 
@@ -74,7 +74,7 @@ Create blueprint back into Litematica or WorldEdit is not supported.
 
 ## Configuration
 
-`config/blueprintnet.properties`:
+`config/schematicsinternet.properties`:
 
 ```properties
 site=https://www.creativemechanicserver.com
@@ -114,7 +114,7 @@ Full license texts are in the repository (`THIRD_PARTY_NOTICES.md`). This mod is
 
 在 Create 的**图纸桌**里直接浏览社区蓝图站，选中后下载到 `schematics/`，还能转换格式、按尺寸切块。
 
-> 有两个版本，按你的游戏版本选：`blueprintnet-1.21.1-0.1.0.jar` 或 `blueprintnet-1.20.1-0.1.0.jar`。
+> 有两个版本，按你的游戏版本选：`schematicsinternet-1.21.1-0.1.0.jar` 或 `schematicsinternet-1.20.1-0.1.0.jar`。
 
 ### 功能
 

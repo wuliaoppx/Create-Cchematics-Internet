@@ -3,30 +3,30 @@ loaderVersion="[4,)"
 license="MIT"
 
 [[mods]]
-modId="blueprintnet"
+modId="schematicsinternet"
 version="0.1.0"
-logoFile="icon.png"
+logoFile="assets/schematicsinternet/icon.png"
 displayName="机械动力：蓝图互联网"
 authors="wuliao"
 description='''在机械动力的图纸桌里加三个按钮：CMS 蓝图站、MCS 蓝图站、蓝图处理。
 可以直接浏览两个站点的蓝图列表，选中后下载到 schematics 目录，立刻载入图纸桌；
 也能把 Litematica / WorldEdit 的蓝图转成机械动力能读的结构 nbt，并按竖直、水平或网格方式分割。'''
 
-[[dependencies.blueprintnet]]
+[[dependencies.schematicsinternet]]
 modId="neoforge"
 type="required"
 versionRange="[21.1.0,)"
 ordering="NONE"
 side="CLIENT"
 
-[[dependencies.blueprintnet]]
+[[dependencies.schematicsinternet]]
 modId="minecraft"
 type="required"
 versionRange="[1.21.1,1.22)"
 ordering="NONE"
 side="CLIENT"
 
-[[dependencies.blueprintnet]]
+[[dependencies.schematicsinternet]]
 modId="create"
 type="required"
 versionRange="[6.0.10,)"

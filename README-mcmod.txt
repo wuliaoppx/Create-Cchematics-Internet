@@ -1,4 +1,4 @@
-机械动力：蓝图互联网（blueprintnet）
+机械动力：蓝图互联网（schematicsinternet）
 ==================================
 
 （本说明为纯文本，可直接粘贴进 MC百科 资料页）
@@ -50,10 +50,10 @@
 
 请按你的游戏版本选择对应的 jar：
 
-　　1.21.1 版　blueprintnet-1.21.1-0.1.0.jar
+　　1.21.1 版　schematicsinternet-1.21.1-0.1.0.jar
 　　　　　Minecraft 1.21.1　＋　NeoForge 21.1.265　＋　Create 6.0.10　＋　Java 21
 
-　　1.20.1 版　blueprintnet-1.20.1-0.1.0.jar
+　　1.20.1 版　schematicsinternet-1.20.1-0.1.0.jar
 　　　　　Minecraft 1.20.1　＋　Forge 47.4.28　＋　Create 6.0.8　＋　Java 17
 
 必须安装机械动力（Create），本模组没有它无法工作。
@@ -110,7 +110,7 @@
 
 【配置文件】
 
-首次启动会生成 config/blueprintnet.properties：
+首次启动会生成 config/schematicsinternet.properties：
 
 　　site=https://www.creativemechanicserver.com
 　　userAgent=（浏览器 UA 字符串）

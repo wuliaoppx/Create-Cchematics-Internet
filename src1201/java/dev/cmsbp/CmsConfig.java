@@ -10,7 +10,7 @@ import java.util.Properties;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 /**
- * 极简配置：config/blueprintnet.properties（旧名 cms-blueprints.properties 会自动迁移）。
+ * 极简配置：config/schematicsinternet.properties（旧名 blueprintnet.properties / cms-blueprints.properties 会自动迁移）。
  * 用 Properties 而不是 TOML，是为了不引第三方库、也不踩 NeoForge 配置 API 的版本差异。
  */
 public final class CmsConfig {
@@ -22,14 +22,20 @@ public final class CmsConfig {
     }
 
     public static void load() {
-        file = FMLPaths.CONFIGDIR.get().resolve("blueprintnet.properties");
-        Path legacy = FMLPaths.CONFIGDIR.get().resolve("cms-blueprints.properties");
-        if (!Files.exists(file) && Files.exists(legacy)) {
-            try {
-                Files.copy(legacy, file);
-                CmsBlueprints.LOG.info("已把旧配置 cms-blueprints.properties 迁移成 blueprintnet.properties");
-            } catch (IOException e) {
-                CmsBlueprints.LOG.warn("迁移旧配置失败：{}", e.toString());
+        file = FMLPaths.CONFIGDIR.get().resolve("schematicsinternet.properties");
+        if (!Files.exists(file)) {
+            for (String oldName : new String[] { "blueprintnet.properties", "cms-blueprints.properties" }) {
+                Path legacy = FMLPaths.CONFIGDIR.get().resolve(oldName);
+                if (!Files.exists(legacy)) {
+                    continue;
+                }
+                try {
+                    Files.copy(legacy, file);
+                    CmsBlueprints.LOG.info("已把旧配置 {} 迁移成 {}", oldName, file.getFileName());
+                    break;
+                } catch (IOException e) {
+                    CmsBlueprints.LOG.warn("迁移旧配置 {} 失败：{}", oldName, e.toString());
+                }
             }
         }
         if (Files.exists(file)) {
@@ -57,7 +63,7 @@ public final class CmsConfig {
         try {
             Files.createDirectories(file.getParent());
             try (OutputStream out = Files.newOutputStream(file)) {
-                PROPS.store(out, "cms-blueprints");
+                PROPS.store(out, "schematicsinternet");
             }
         } catch (IOException e) {
             CmsBlueprints.LOG.warn("写入配置失败：{}", e.toString());

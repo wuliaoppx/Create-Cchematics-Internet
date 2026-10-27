@@ -16,7 +16,7 @@ $srcDir = Join-Path $root "src1201\java"
 $resDir = Join-Path $root "src1201\resources"
 $classesDir = Join-Path $m1201 "classes"
 $toolClasses = Join-Path $m1201 "tools-classes"
-$jarName = "blueprintnet-1.20.1-0.1.0.jar"
+$jarName = "schematicsinternet-1.20.1-0.1.0.jar"
 $jarPath = Join-Path $m1201 $jarName
 
 $javac = "javac"    # Zulu 21 / JDK 21 在 PATH 上，用 --release 17 产出 1.20.1 需要的字节码
@@ -184,7 +184,7 @@ Log "产物 $jarName（$size，$jarClasses 个 class）SHA256=$hash"
 # ---------- 5. 安装 ----------
 if (-not $NoInstall) {
     if (-not (Test-Path $modsDir)) { throw "mods 目录不存在：$modsDir" }
-    Get-ChildItem $modsDir -File | Where-Object { $_.Name -match "^(cmsblueprints|blueprintnet)-.*\.jar$" } | Remove-Item -Force
+    Get-ChildItem $modsDir -File | Where-Object { $_.Name -match "^(cmsblueprints|blueprintnet|schematicsinternet)-.*\.jar$" } | Remove-Item -Force
     Copy-Item $jarPath (Join-Path $modsDir $jarName) -Force
     $downloads = Join-Path $env:USERPROFILE "Downloads"
     if (Test-Path $downloads) { Copy-Item $jarPath (Join-Path $downloads $jarName) -Force }
